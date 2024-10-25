@@ -1,0 +1,11 @@
+@API_UBAM_HostAddress = http://localhost:5200
+
+GET {{API_UBAM_HostAddress}}/todos/
+Accept: application/json
+
+###
+
+GET {{API_UBAM_HostAddress}}/todos/1
+Accept: application/json
+
+###
