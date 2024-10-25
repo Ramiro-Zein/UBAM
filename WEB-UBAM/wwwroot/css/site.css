@@ -20,3 +20,18 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link,
+.navbar-custom .dropdown-item,
+.navbar-custom .offcanvas-title {
+  color: whitesmoke;
+}
+
+.navbar-custom .nav-link.active {
+  color: whitesmoke;
+}
+
+.navbar-custom .navbar-toggler-icon {
+  filter: invert(100%);
+}
