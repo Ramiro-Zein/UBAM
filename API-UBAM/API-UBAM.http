@@ -1,6 +1,0 @@
-@API_UBAM_HostAddress = http://localhost:5200
-
-GET {{API_UBAM_HostAddress}}/
-Accept: application/json
-
-###

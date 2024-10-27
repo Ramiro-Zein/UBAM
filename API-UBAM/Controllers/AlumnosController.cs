@@ -18,8 +18,5 @@ public class AlumnosController : ControllerBase
 
     // GET: api/Alumnos
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Alumno>>> GetAlumnos()
-    {
-        return await _context.Alumnos.ToListAsync();
-    }
+    public async Task<ActionResult<IEnumerable<Alumno>>> GetAlumnos() => await _context.Alumnos.ToListAsync();
 }
