@@ -3,5 +3,39 @@
 }
 
 <div class="container my-5">
-    
+    <h2 class="mb-4 fw-bold p-2">Lista de Alumnos</h2>
+    <table class="table table-striped" id="alumnosTable">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Carrera</th>
+            <th>Edad</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Aquí se llenarán los datos de los alumnos -->
+        </tbody>
+    </table>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('@Url.Action("GetAlumnos", "Alumnos")')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById("alumnosTable").querySelector("tbody");
+                data.forEach(alumno => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${alumno.id}</td>
+                        <td>${alumno.nombre}</td>
+                        <td>${alumno.carrera}</td>
+                        <td>${alumno.edad}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error("Error al cargar los datos de los alumnos:", error));
+    });
+</script>
