@@ -7,7 +7,6 @@
     <table class="table table-striped" id="alumnosTable">
         <thead>
         <tr>
-            <th>Id</th>
             <th>Nombre</th>
             <th>Carrera</th>
             <th>Edad</th>
@@ -28,7 +27,6 @@
                 data.forEach(alumno => {
                     const row = document.createElement("tr");
                     row.innerHTML = `
-                        <td>${alumno.id}</td>
                         <td>${alumno.nombre}</td>
                         <td>${alumno.carrera}</td>
                         <td>${alumno.edad}</td>
