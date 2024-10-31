@@ -1,7 +1,12 @@
+using WEB_UBAM.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var apiBaseAddress = builder.Configuration["API:API_CLIENT"];
+builder.Services.AddCustomHttpClients(apiBaseAddress);
 
 var app = builder.Build();
 
@@ -17,7 +22,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(

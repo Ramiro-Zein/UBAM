@@ -4,36 +4,25 @@
 
 <div class="container my-5">
     <h2 class="mb-4 fw-bold p-2">Lista de Alumnos</h2>
-    <table class="table table-striped" id="alumnosTable">
+    <table class="table">
         <thead>
         <tr>
             <th>Nombre</th>
             <th>Carrera</th>
-            <th>Edad</th>
+            <th>Grupo</th>
+            <th>Fecha de Nacimiento</th>
         </tr>
         </thead>
         <tbody>
-        <!-- Aquí se llenarán los datos de los alumnos -->
+        @foreach (var alumno in Model)
+        {
+            <tr>
+                <td>@alumno.NombreAlumno</td>
+                <td>@alumno.CarreraAlumno</td>
+                <td>@alumno.GrupoAlumno</td>
+                <td>@alumno.FechaNacimientoAlumno.ToShortDateString()</td>
+            </tr>
+        }
         </tbody>
     </table>
 </div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        fetch('@Url.Action("GetAlumnos", "Alumnos")')
-            .then(response => response.json())
-            .then(data => {
-                const tableBody = document.getElementById("alumnosTable").querySelector("tbody");
-                data.forEach(alumno => {
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
-                        <td>${alumno.nombre}</td>
-                        <td>${alumno.carrera}</td>
-                        <td>${alumno.edad}</td>
-                    `;
-                    tableBody.appendChild(row);
-                });
-            })
-            .catch(error => console.error("Error al cargar los datos de los alumnos:", error));
-    });
-</script>

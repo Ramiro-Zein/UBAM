@@ -62,6 +62,7 @@ public class UbamDbContext : DbContext
         var persona2Id = Guid.Parse("c450de8c-7993-554a-af11-857ab5a2c95b");
         var persona3Id = Guid.Parse("d560ef9d-88a4-665b-b012-968bc6b3d06c");
         var persona4Id = Guid.Parse("e670f0ae-99b5-776c-c123-a79cd7c4e17d");
+        var persona5Id = Guid.Parse("e670f0ae-99b5-776c-c123-a79cd7c4e17a");
 
         modelBuilder.Entity<Persona>().HasData(
             new Persona
@@ -103,6 +104,16 @@ public class UbamDbContext : DbContext
                 Fecha_Nacimiento_Persona = new DateOnly(1995, 12, 5),
                 Sexo_Persona = Persona.Sexo.Mujer,
                 Curp_Persona = "GOSA951205MDFRRL07"
+            },
+            new Persona
+            {
+                Id_Persona = persona5Id,
+                Nombre_Persona = "Juanito",
+                Apellido_Paterno_Persona = "González",
+                Apellido_Materno_Persona = "Silva",
+                Fecha_Nacimiento_Persona = new DateOnly(1995, 12, 5),
+                Sexo_Persona = Persona.Sexo.Mujer,
+                Curp_Persona = "GOSA951205MDFRRL07"
             }
         );
 
@@ -132,14 +143,13 @@ public class UbamDbContext : DbContext
         // 3. Usuarios
         var usuario1Id = Guid.Parse("a8902b2a-2345-6789-01bc-def123456789");
         var usuario2Id = Guid.Parse("b9013c3b-3456-7890-12cd-efab34567890");
-        
+
         modelBuilder.Entity<Usuario>().HasData(
             new Usuario
             {
                 Id_Usuario = usuario1Id,
                 Nombre_Usuario = "ramiro.zein",
-                Clave_Usuario =
-                    BCrypt.Net.BCrypt.HashPassword("1234"),
+                Clave_Usuario = BCrypt.Net.BCrypt.HashPassword("1234"),
                 Estatus_Usuario = Usuario.Estatus.Activo,
                 Id_Persona = persona1Id
             },
@@ -186,6 +196,7 @@ public class UbamDbContext : DbContext
 
         // 6. Alumnos
         var alumno1Id = Guid.Parse("e2346f6c-6789-0123-45fa-cdef67890123");
+        var alumno2Id = Guid.Parse("e2346f6c-6789-0123-45fa-cdef67890124");
 
         modelBuilder.Entity<Alumno>().HasData(
             new Alumno
@@ -193,6 +204,13 @@ public class UbamDbContext : DbContext
                 Id_Alumno = alumno1Id,
                 Grupo_Alumno = "Sistemas 101",
                 Id_Persona = persona2Id,
+                Id_Carrera = carrera1Id
+            },
+            new Alumno
+            {
+                Id_Alumno = alumno2Id,
+                Grupo_Alumno = "Sistemas 102",
+                Id_Persona = persona5Id,
                 Id_Carrera = carrera1Id
             }
         );

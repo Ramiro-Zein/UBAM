@@ -24,9 +24,10 @@ public class AlumnosController : ControllerBase
         var alumnos = await _context.Alumnos
             .Select(a => new AlumnoDto
             {
-                Nombre_Alumno = a.Persona.Nombre_Persona,
-                Carrera_Alumno = display.ConvertDisplay(a.Carrera.Nombre_Carrera.ToString()),
-                FechaNacimiento_Alumno = a.Persona.Fecha_Nacimiento_Persona
+                NombreAlumno = a.Persona.Nombre_Persona + " " + a.Persona.Apellido_Paterno_Persona + " " + a.Persona.Apellido_Materno_Persona,
+                CarreraAlumno = display.ConvertDisplay(a.Carrera.Nombre_Carrera.ToString()),
+                GrupoAlumno = a.Persona.Alumno.Grupo_Alumno,
+                FechaNacimientoAlumno = a.Persona.Fecha_Nacimiento_Persona
             })
             .ToListAsync();
 

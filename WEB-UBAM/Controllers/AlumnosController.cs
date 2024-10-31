@@ -1,24 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WEB_UBAM.Services;
 
 namespace WEB_UBAM.Controllers;
 
 public class AlumnosController : Controller
 {
-    public IActionResult Index()
+    private readonly AlumnosService _alumnosService;
+
+    public AlumnosController(AlumnosService alumnosService)
     {
-        return View();
+        _alumnosService = alumnosService;
     }
 
-    [HttpGet]
-    public JsonResult GetAlumnos()
+    public async Task<IActionResult> Index()
     {
-        var alumnos = new List<object>
-        {
-            new { Id = 1, Nombre = "Juan Perez", Carrera = "Ingeniería en Sistemas", Edad = 22 },
-            new { Id = 2, Nombre = "Ana García", Carrera = "Licenciatura en Matemáticas", Edad = 21 },
-            new { Id = 3, Nombre = "Carlos López", Carrera = "Ingeniería Industrial", Edad = 23 }
-        };
-
-        return Json(alumnos);
+        var alumnos = await _alumnosService.GetAlumno();
+        return View(alumnos);
     }
 }

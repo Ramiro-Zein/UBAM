@@ -1,19 +1,44 @@
-﻿using API_UBAM.DatabaseContext;
-using Microsoft.AspNetCore.Identity.Data;
+﻿using API_UBAM.DTO;
+using API_UBAM.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API_UBAM.Controllers;
 
-[ApiController]
 [Route("api/[controller]")]
+[ApiController]
 public class AuthController : ControllerBase
 {
-    private readonly UbamDbContext _context;
+    private readonly IAuthService _authService;
 
-    public AuthController(UbamDbContext context)
+    public AuthController(IAuthService authService)
     {
-        _context = context;
+        _authService = authService;
     }
-    
+
+    [HttpPost("login")]
+    public async Task<ActionResult<UserDTO>> Login([FromBody] LoginSolicitarDto solicitar)
+    {
+        try
+        {
+            var userInfo = await _authService.ValidateUser(solicitar);
+            return Ok(userInfo);
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            return Unauthorized(new { message = ex.Message });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = "Error interno del servidor: " + ex.Message });
+        }
+    }
+
+    [HttpPost("logout")]
+    [Authorize]
+    public async Task<IActionResult> Logout()
+    {
+        await _authService.SignOut();
+        return Ok(new { message = "Sesión cerrada exitosamente" });
+    }
 }

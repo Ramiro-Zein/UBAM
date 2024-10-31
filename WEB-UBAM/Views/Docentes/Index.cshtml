@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Docentes";
+}
+
+<div class="container my-5">
+    <h2 class="mb-4 fw-bold p-2">Lista de docentes</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var docente in Model)
+        {
+        <tr>
+            <td>@docente.NombreDocente</td>
+        </tr>
+        }
+        </tbody>
+    </table>
+</div>
