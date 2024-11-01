@@ -8,6 +8,7 @@ builder.Services.AddControllersWithViews();
 var apiBaseAddress = builder.Configuration["API:API_CLIENT"];
 builder.Services.AddCustomHttpClients(apiBaseAddress);
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -18,6 +19,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseStatusCodePagesWithRedirects("/notFound");
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -26,6 +29,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Inicio}/{action=Index}/{id?}");
 
 app.Run();

@@ -1,6 +1,4 @@
-﻿using API_UBAM.Models;
-
-namespace API_UBAM.DTO;
+﻿namespace WEB_UBAM.Models;
 
 public class LoginRespuestaDto
 {

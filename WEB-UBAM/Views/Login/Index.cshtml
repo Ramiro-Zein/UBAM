@@ -1,9 +1,8 @@
 ﻿@{
-    Layout = null;
+Layout = null;
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <title>Iniciar sesión</title>
@@ -18,20 +17,50 @@
         <div class="m-4">
             <img src="~/images/ubam_login.png" class="img-fluid" alt="...">
         </div>
-        <form>
+        <form method="post" asp-action="Login">
             <div class="form-group mb-4">
-                <input type="email" class="form-control" id="email" placeholder="Nombre de usuario">
+                <input type="text" name="Nombre_Usuario" class="form-control" id="email" placeholder="Nombre de usuario" required>
             </div>
             <div class="form-group mb-4">
-                <input type="password" class="form-control" id="password" placeholder="Clave">
+                <input type="password" name="Clave_Usuario" class="form-control" id="password" placeholder="Clave" required>
             </div>
             <button type="submit" class="btn btn-primary w-100 py-2">Ingresar</button>
         </form>
     </div>
 </div>
 
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="errorMessage">Credenciales inválidas</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
+
+<script>
+    $(document).ready(function () {
+        var errorMessage = '@Html.Raw(ViewData["ErrorMessage"])';
+        if (errorMessage) {
+            $('#errorMessage').text(errorMessage);
+            $('#errorModal').modal('show');
+        }
+    });
+</script>
+
 </body>
 </html>

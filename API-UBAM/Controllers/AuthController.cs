@@ -1,44 +1,43 @@
-﻿using API_UBAM.DTO;
+﻿using API_UBAM.DatabaseContext;
+using API_UBAM.DTO;
 using API_UBAM.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API_UBAM.Controllers;
 
-[Route("api/[controller]")]
 [ApiController]
-public class AuthController : ControllerBase
+[Route("api/[controller]")]
+public class AuthController(IAuthService authService, UbamDbContext context) : ControllerBase
 {
-    private readonly IAuthService _authService;
-
-    public AuthController(IAuthService authService)
-    {
-        _authService = authService;
-    }
-
     [HttpPost("login")]
-    public async Task<ActionResult<UserDTO>> Login([FromBody] LoginSolicitarDto solicitar)
+    public async Task<IActionResult> Login([FromBody] LoginSolicitarDto respuesta)
     {
-        try
+        if (!await authService.ValidarUsuario(respuesta.Nombre_Usuario, respuesta.Clave_Usuario))
+            return Unauthorized("Credenciales incorrectas");
+        
+        var usuario = await context.Usuarios
+            .Include(u => u.Usuario_Roles)
+            .ThenInclude(ur => ur.Rol).Include(usuario => usuario.Persona)
+            .FirstOrDefaultAsync(u => EF.Functions.Collate(u.Nombre_Usuario, "Latin1_General_BIN") == respuesta.Nombre_Usuario);
+
+        if (usuario == null) return Unauthorized("Credenciales incorrectas");
+        
+        var respuestaDto = new LoginRespuestaDto
         {
-            var userInfo = await _authService.ValidateUser(solicitar);
-            return Ok(userInfo);
-        }
-        catch (UnauthorizedAccessException ex)
-        {
-            return Unauthorized(new { message = ex.Message });
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new { message = "Error interno del servidor: " + ex.Message });
-        }
+            Mensaje_Login_Respuesta = "Bienvenido: " + usuario.Nombre_Usuario,
+            Nombre_Persona_Login_Respuesta = usuario.Persona.Nombre_Persona + " " + usuario.Persona.Apellido_Paterno_Persona + " " + usuario.Persona.Apellido_Materno_Persona,
+            Roles_Login_Respuesta = usuario.Usuario_Roles.Select(ur => ur.Rol.Nombre_Rol.ToString())
+        };
+
+        return Ok(new { Mensaje = "Usuario autenticado", Datos = respuestaDto });
+
     }
 
     [HttpPost("logout")]
-    [Authorize]
     public async Task<IActionResult> Logout()
     {
-        await _authService.SignOut();
-        return Ok(new { message = "Sesión cerrada exitosamente" });
+        await authService.CerrarSesion();
+        return Ok("Sesión cerrada.");
     }
 }

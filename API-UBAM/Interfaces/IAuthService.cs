@@ -4,6 +4,6 @@ namespace API_UBAM.Interfaces;
 
 public interface IAuthService
 {
-    Task<UserDTO> ValidateUser(LoginSolicitarDto loginSolicitar);
-    Task SignOut();
+    Task<bool> ValidarUsuario(string nombreUsuario, string clave);
+    Task CerrarSesion();
 }

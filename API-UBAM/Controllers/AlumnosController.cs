@@ -8,20 +8,13 @@ namespace API_UBAM.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AlumnosController : ControllerBase
+public class AlumnosController(UbamDbContext context) : ControllerBase
 {
-    private readonly UbamDbContext _context;
-
-    public AlumnosController(UbamDbContext context)
-    {
-        _context = context;
-    }
-
     [HttpGet]
     public async Task<ActionResult<IEnumerable<AlumnoDto>>> GetAlumnos()
     {
         DisplayNameConverter display = new DisplayNameConverter();
-        var alumnos = await _context.Alumnos
+        var alumnos = await context.Alumnos
             .Select(a => new AlumnoDto
             {
                 NombreAlumno = a.Persona.Nombre_Persona + " " + a.Persona.Apellido_Paterno_Persona + " " + a.Persona.Apellido_Materno_Persona,

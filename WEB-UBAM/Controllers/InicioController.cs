@@ -4,11 +4,11 @@ using WEB_UBAM.Models;
 
 namespace WEB_UBAM.Controllers;
 
-public class HomeController : Controller
+public class InicioController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ILogger<InicioController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    public InicioController(ILogger<InicioController> logger)
     {
         _logger = logger;
     }

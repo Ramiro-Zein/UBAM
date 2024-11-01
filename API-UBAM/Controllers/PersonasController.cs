@@ -7,19 +7,12 @@ namespace API_UBAM.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class PersonasController : Controller
+public class PersonasController(UbamDbContext context) : Controller
 {
-    private readonly UbamDbContext _context;
-
-    public PersonasController(UbamDbContext context)
-    {
-        _context = context;
-    }
-    
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Persona>>> GetPersona()
     {
-        return await _context.Personas
+        return await context.Personas
             .Include(u => u.Usuario)
             .Include(a => a.Alumno)
             .Include(d => d.Docente)
