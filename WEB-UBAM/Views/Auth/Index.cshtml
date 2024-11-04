@@ -17,14 +17,14 @@
         <div class="m-4">
             <img src="~/images/ubam_login.png" class="img-fluid" alt="...">
         </div>
-        
+
         @if (TempData["ErrorMessage"] != null)
         {
             <div class="alert alert-info" role="alert">
                 @TempData["ErrorMessage"]
             </div>
         }
-        
+
         <form method="post" asp-action="Login">
             <div class="form-group mb-4">
                 <input type="text" name="Nombre_Usuario" class="form-control" id="email" placeholder="Nombre de usuario" required>

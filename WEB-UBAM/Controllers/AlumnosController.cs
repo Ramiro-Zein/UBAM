@@ -1,20 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WEB_UBAM.Services;
 
 namespace WEB_UBAM.Controllers;
 
-public class AlumnosController : Controller
+[Authorize]
+public class AlumnosController(AlumnosService alumnosService) : Controller
 {
-    private readonly AlumnosService _alumnosService;
-
-    public AlumnosController(AlumnosService alumnosService)
-    {
-        _alumnosService = alumnosService;
-    }
-
     public async Task<IActionResult> Index()
     {
-        var alumnos = await _alumnosService.GetAlumno();
+        var alumnos = await alumnosService.GetAlumno();
         return View(alumnos);
     }
 }

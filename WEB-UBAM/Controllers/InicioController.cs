@@ -1,44 +1,22 @@
-using System.Diagnostics;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using WEB_UBAM.Models;
 
 namespace WEB_UBAM.Controllers;
 
-public class InicioController : Controller
+[Authorize]
+public class InicioController(ILogger<InicioController> logger) : Controller
 {
-    private readonly ILogger<InicioController> _logger;
-
-    public InicioController(ILogger<InicioController> logger)
-    {
-        _logger = logger;
-    }
+    private readonly ILogger<InicioController> _logger = logger;
 
     public IActionResult Index()
     {
+        var nombreCompleto = User.Identity?.Name;
+        var roles = User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList();
+
+        ViewBag.NombreCompleto = nombreCompleto;
+        ViewBag.Roles = roles;
+
         return View();
-    }
-
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
-}
-
-public class SessionAuthorizeAttribute : ActionFilterAttribute
-{
-    public override void OnActionExecuting(ActionExecutingContext context)
-    {
-        var session = context.HttpContext.Session;
-        if (string.IsNullOrEmpty(session.GetString("UserName")))
-        {
-            context.Result = new RedirectToActionResult("Index", "Login", null);
-        }
     }
 }

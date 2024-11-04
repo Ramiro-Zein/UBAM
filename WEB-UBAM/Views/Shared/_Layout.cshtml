@@ -38,14 +38,17 @@
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <li><a class="dropdown-item" href="/">Inicio</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                                <li><a class="dropdown-item" href="/auth/Logout">Cerrar sesión</a></li>
                             </ul>
                         </li>
+                        @if (User.IsInRole("Administrador"))
+                        {
                         <li class="nav-item">
                             <a class="nav-link" href="docentes">
                                 <i class="fas fa-user-graduate"></i>Docentes
                             </a>
                         </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link" href="alumnos">
                                 <i class="fas fa-user-graduate"></i>Alumnos

@@ -3,16 +3,18 @@
 }
 
 <head>
-    <link rel="stylesheet" href="~/css/Views/Home.css" />
+    <link rel="stylesheet" href="~/css/Views/Home.css"/>
 </head>
 
 <div class="container my-5">
 
-    <h1>Bienvenido, @TempData["NombreCompleto"]</h1>
-    <p>Roles: @TempData["Roles"]</p>
-
     <div class="welcome-section position-relative mt-4">
-        
+        <h2>Universidad Bancaria de México</h2>
+        <h4>Bienvenido @ViewBag.NombreCompleto</h4>
+        @foreach (var role in ViewBag.Roles)
+        {
+            <li>@role</li>
+        }
     </div>
 
     <div id="carouselExampleIndicators" class="carousel slide mt-4">

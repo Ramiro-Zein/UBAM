@@ -63,6 +63,7 @@ public class UbamDbContext : DbContext
         var persona3Id = Guid.Parse("d560ef9d-88a4-665b-b012-968bc6b3d06c");
         var persona4Id = Guid.Parse("e670f0ae-99b5-776c-c123-a79cd7c4e17d");
         var persona5Id = Guid.Parse("e670f0ae-99b5-776c-c123-a79cd7c4e17a");
+        var persona6Id = Guid.Parse("a670f0ae-99b5-776c-c123-a79cd7c4e17a");
 
         modelBuilder.Entity<Persona>().HasData(
             new Persona
@@ -74,6 +75,16 @@ public class UbamDbContext : DbContext
                 Fecha_Nacimiento_Persona = new DateOnly(2003, 9, 25),
                 Sexo_Persona = Persona.Sexo.Hombre,
                 Curp_Persona = "CORR900524HDFRRL04"
+            },
+            new Persona
+            {
+                Id_Persona = persona6Id,
+                Nombre_Persona = "Elizabeth",
+                Apellido_Paterno_Persona = "Ortiz",
+                Apellido_Materno_Persona = "Canales",
+                Fecha_Nacimiento_Persona = new DateOnly(2004, 11, 10),
+                Sexo_Persona = Persona.Sexo.Mujer,
+                Curp_Persona = "GOSA951205MDFRRL08"
             },
             new Persona
             {
@@ -115,6 +126,7 @@ public class UbamDbContext : DbContext
                 Sexo_Persona = Persona.Sexo.Mujer,
                 Curp_Persona = "GOSA951205MDFRRL07"
             }
+            
         );
 
         // 2. Roles
@@ -143,7 +155,8 @@ public class UbamDbContext : DbContext
         // 3. Usuarios
         var usuario1Id = Guid.Parse("a8902b2a-2345-6789-01bc-def123456789");
         var usuario2Id = Guid.Parse("b9013c3b-3456-7890-12cd-efab34567890");
-
+        var usuario3Id = Guid.Parse("c9013c3b-3456-7890-12cd-efab34567890");
+        
         modelBuilder.Entity<Usuario>().HasData(
             new Usuario
             {
@@ -152,6 +165,14 @@ public class UbamDbContext : DbContext
                 Clave_Usuario = BCrypt.Net.BCrypt.HashPassword("1234"),
                 Estatus_Usuario = Usuario.Estatus.Activo,
                 Id_Persona = persona1Id
+            },
+            new Usuario
+            {
+                Id_Usuario = usuario3Id,
+                Nombre_Usuario = "eli.ortiz",
+                Clave_Usuario = BCrypt.Net.BCrypt.HashPassword("123"),
+                Estatus_Usuario = Usuario.Estatus.Activo,
+                Id_Persona = persona6Id
             },
             new Usuario
             {
@@ -173,7 +194,12 @@ public class UbamDbContext : DbContext
             new Usuario_Rol
             {
                 Id_Usuario = usuario2Id,
-                Id_Rol = rolAlumnoId
+                Id_Rol = rolDocenteId
+            },
+            new Usuario_Rol
+            {
+                Id_Usuario = usuario3Id,
+                Id_Rol = rolAdminId
             }
         );
 

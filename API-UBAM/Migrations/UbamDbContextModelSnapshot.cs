@@ -159,6 +159,16 @@ namespace API_UBAM.Migrations
                         },
                         new
                         {
+                            Id_Persona = new Guid("a670f0ae-99b5-776c-c123-a79cd7c4e17a"),
+                            Apellido_Materno_Persona = "Canales",
+                            Apellido_Paterno_Persona = "Ortiz",
+                            Curp_Persona = "GOSA951205MDFRRL08",
+                            Fecha_Nacimiento_Persona = new DateOnly(2004, 11, 10),
+                            Nombre_Persona = "Elizabeth",
+                            Sexo_Persona = 1
+                        },
+                        new
+                        {
                             Id_Persona = new Guid("c450de8c-7993-554a-af11-857ab5a2c95b"),
                             Apellido_Materno_Persona = "Hernández",
                             Apellido_Paterno_Persona = "López",
@@ -261,15 +271,23 @@ namespace API_UBAM.Migrations
                         new
                         {
                             Id_Usuario = new Guid("a8902b2a-2345-6789-01bc-def123456789"),
-                            Clave_Usuario = "$2a$11$vDVy0ih0.1t2AvnTQpjiPuE56Bc9VhIQJsLk61fWOh/OsgNaXiPIe",
+                            Clave_Usuario = "$2a$11$aJBPHtHukHbsDcqrfApKmuQ5oXu9dQvsKbOMWYroUC8zz1Fp2UhIq",
                             Estatus_Usuario = 1,
                             Id_Persona = new Guid("b350ce7b-6982-4439-9f00-7469a49e1b84"),
                             Nombre_Usuario = "ramiro.zein"
                         },
                         new
                         {
+                            Id_Usuario = new Guid("c9013c3b-3456-7890-12cd-efab34567890"),
+                            Clave_Usuario = "$2a$11$NXfggIrO5WnOAsreuVoPzeC3uIbHyjR4skTg2mGRA0JySBrVAfEY6",
+                            Estatus_Usuario = 1,
+                            Id_Persona = new Guid("a670f0ae-99b5-776c-c123-a79cd7c4e17a"),
+                            Nombre_Usuario = "eli.ortiz"
+                        },
+                        new
+                        {
                             Id_Usuario = new Guid("b9013c3b-3456-7890-12cd-efab34567890"),
-                            Clave_Usuario = "$2a$11$YL/77m6ZnvXlhij9aXBus.HvDsDneA/Zy/wz6wMNjPWW6LraL/goC",
+                            Clave_Usuario = "$2a$11$taNvLZppWQ.Bx.jsSVvplOFwWIE9PcAleXP75r0scDb4WkvbBP1xi",
                             Estatus_Usuario = 1,
                             Id_Persona = new Guid("c450de8c-7993-554a-af11-857ab5a2c95b"),
                             Nombre_Usuario = "maria.lopez"
@@ -301,7 +319,12 @@ namespace API_UBAM.Migrations
                         new
                         {
                             Id_Usuario = new Guid("b9013c3b-3456-7890-12cd-efab34567890"),
-                            Id_Rol = new Guid("f7801a1f-1234-5678-90ab-cdef12345680")
+                            Id_Rol = new Guid("f7801a1f-1234-5678-90ab-cdef12345679")
+                        },
+                        new
+                        {
+                            Id_Usuario = new Guid("c9013c3b-3456-7890-12cd-efab34567890"),
+                            Id_Rol = new Guid("f7801a1f-1234-5678-90ab-cdef12345678")
                         });
                 });
 

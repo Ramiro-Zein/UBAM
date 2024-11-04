@@ -36,10 +36,12 @@ public class AuthController(IAuthService authService, UbamDbContext context) : C
         return Ok(new
         {
             Mensaje = "Usuario autenticado",
+            Bienvenida = $"Bienvenido: {usuario.Nombre_Usuario}",
             Nombre_Completo = respuestaDto.Nombre_Persona_Login_Respuesta,
             Roles = respuestaDto.Roles_Login_Respuesta
         });
     }
+
 
     [HttpPost("logout")]
     public async Task<IActionResult> Logout()
