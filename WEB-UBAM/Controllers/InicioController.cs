@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using WEB_UBAM.Models;
 
 namespace WEB_UBAM.Controllers;
@@ -27,5 +28,17 @@ public class InicioController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+}
+
+public class SessionAuthorizeAttribute : ActionFilterAttribute
+{
+    public override void OnActionExecuting(ActionExecutingContext context)
+    {
+        var session = context.HttpContext.Session;
+        if (string.IsNullOrEmpty(session.GetString("UserName")))
+        {
+            context.Result = new RedirectToActionResult("Index", "Login", null);
+        }
     }
 }

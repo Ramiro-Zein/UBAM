@@ -2,7 +2,7 @@
 
 namespace WEB_UBAM.Models;
 
-public class LoginSolicitarDto
+public class LoginSolicitar
 {
     [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
     public string Nombre_Usuario { get; set; }
