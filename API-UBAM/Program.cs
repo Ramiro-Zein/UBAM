@@ -1,35 +1,46 @@
+using System.Text.Json;
 using System.Text.Json.Serialization;
+using API_UBAM.DatabaseContext;
+using API_UBAM.DTO;
+using API_UBAM.Interfaces;
+using API_UBAM.Services;
+using Microsoft.EntityFrameworkCore;
 
-var builder = WebApplication.CreateSlimBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.ConfigureHttpJsonOptions(options =>
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddControllers();
+
+// Agregar los controladores
+builder.Services.AddControllers().AddJsonOptions(options =>
 {
-    options.SerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
 });
+
+// Conexión a base de datos
+builder.Services.AddDbContext<UbamDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Servicios de autenticación
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddAuthentication("Cookies")
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/api/auth/login";
+        options.LogoutPath = "/api/auth/logout";
+        options.Cookie.Name = "UbamAuthCookie";
+    });
+
 
 var app = builder.Build();
 
-var sampleTodos = new Todo[]
-{
-    new(1, "Walk the dog"),
-    new(2, "Do the dishes", DateOnly.FromDateTime(DateTime.Now)),
-    new(3, "Do the laundry", DateOnly.FromDateTime(DateTime.Now.AddDays(1))),
-    new(4, "Clean the bathroom"),
-    new(5, "Clean the car", DateOnly.FromDateTime(DateTime.Now.AddDays(2)))
-};
-
-var todosApi = app.MapGroup("/todos");
-todosApi.MapGet("/", () => sampleTodos);
-todosApi.MapGet("/{id}", (int id) =>
-    sampleTodos.FirstOrDefault(a => a.Id == id) is { } todo
-        ? Results.Ok(todo)
-        : Results.NotFound());
-
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
 app.Run();
 
-public record Todo(int Id, string? Title, DateOnly? DueBy = null, bool IsComplete = false);
-
-[JsonSerializable(typeof(Todo[]))]
-internal partial class AppJsonSerializerContext : JsonSerializerContext
-{
-}
+// "DefaultConnection": "Server=SISTEMAS5;Database=ubam;User ID=zein;Password=1234;TrustServerCertificate=True;Connection Timeout=30;"
+// "DefaultConnection": "Server=ZEIN;Database=ubam;User ID=ramiro;Password=123;TrustServerCertificate=True;Connection Timeout=30;"

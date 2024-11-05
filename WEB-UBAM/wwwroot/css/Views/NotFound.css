@@ -1,0 +1,14 @@
+﻿body {
+    background-color: whitesmoke;
+}
+
+body span {
+    font-size: 48px;
+    font-weight: 500;
+}
+
+body p {
+    font-size: 32px;
+    font-weight: 400;
+}
+

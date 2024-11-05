@@ -19,4 +19,27 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: whitesmoke;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link,
+.navbar-custom .dropdown-item,
+.navbar-custom .offcanvas-title {
+  color: whitesmoke;
+}
+
+.navbar-custom .nav-link.active {
+  color: whitesmoke;
+}
+
+.navbar-custom .navbar-toggler-icon {
+  filter: invert(100%);
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 0.5rem;
 }
