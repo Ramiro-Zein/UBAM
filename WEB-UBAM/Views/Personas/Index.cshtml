@@ -16,6 +16,7 @@
             <th>Fecha de Nacimiento</th>
             <th>Sexo</th>
             <th>CURP</th>
+            <th>Usuario -Rol</th>
         </tr>
         </thead>
         <tbody>
@@ -28,6 +29,19 @@
                 <td>@persona.FechaNacimientoPersonaDto.ToShortDateString()</td>
                 <td>@persona.SexoPersonaDto</td>
                 <td>@persona.CurpPersonaDto</td>
+                <td>
+                    @if (persona.Roles != null && persona.Roles.Values.Count > 0)
+                    {
+                        @foreach (var rol in persona.Roles.Values)
+                        {
+                            @rol
+                        }
+                    }
+                    else
+                    {
+                        <span>No</span>
+                    }
+                </td>
             </tr>
         }
         </tbody>
