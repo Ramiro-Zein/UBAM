@@ -7,4 +7,29 @@
         <h2 class="fw-bold p-2">Lista de personas</h2>
     </div>
 
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido Paterno</th>
+            <th>Apellido Materno</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Sexo</th>
+            <th>CURP</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var persona in Model)
+        {
+            <tr>
+                <td>@persona.NombrePersonaDto</td>
+                <td>@persona.ApellidoPaternoPersonaDto</td>
+                <td>@persona.ApellidoMaternoPersonaDto</td>
+                <td>@persona.FechaNacimientoPersonaDto.ToShortDateString()</td>
+                <td>@persona.SexoPersonaDto</td>
+                <td>@persona.CurpPersonaDto</td>
+            </tr>
+        }
+        </tbody>
+    </table>
 </div>

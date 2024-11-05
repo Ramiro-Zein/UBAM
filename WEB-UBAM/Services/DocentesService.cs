@@ -2,20 +2,13 @@
 
 namespace WEB_UBAM.Services;
 
-public class DocentesService
+public class DocentesService(HttpClient httpClient)
 {
-    private readonly HttpClient _httpClient;
-
-    public DocentesService(HttpClient httpClient)
-    {
-        _httpClient = httpClient;
-    }
-
     public async Task<List<Docente>> GetDocentes()
     {
         try
         {
-            var response = await _httpClient.GetFromJsonAsync<ApiResponse<Docente>>("Docentes");
+            var response = await httpClient.GetFromJsonAsync<ApiResponse<Docente>>("Docentes");
             return response?.Values ?? new List<Docente>();
         }
         catch (Exception ex)

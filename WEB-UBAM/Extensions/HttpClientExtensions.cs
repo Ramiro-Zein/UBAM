@@ -19,5 +19,10 @@ public static class HttpClientApi
         {
             client.BaseAddress = new Uri(apiBaseAddress);
         });
+
+        services.AddHttpClient<PersonasService>(client =>
+        {
+            client.BaseAddress = new Uri(apiBaseAddress);
+        });
     }
 }

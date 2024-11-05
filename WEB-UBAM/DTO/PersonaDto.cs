@@ -1,6 +1,4 @@
-﻿using API_UBAM.Models;
-
-namespace API_UBAM.DTO;
+﻿namespace WEB_UBAM.DTO;
 
 public class PersonaDto
 {
@@ -10,5 +8,4 @@ public class PersonaDto
     public DateOnly FechaNacimientoPersonaDto { get; set; }
     public string SexoPersonaDto { get; set; }
     public string CurpPersonaDto { get; set; }
-    
 }
