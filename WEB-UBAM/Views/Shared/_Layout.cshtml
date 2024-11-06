@@ -60,11 +60,14 @@
                                 </a>
                             </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link" href="alumnos">
-                                <i class="fas fa-user-graduate"></i>Alumnos
-                            </a>
-                        </li>
+                        @if (!User.IsInRole("Alumno"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="alumnos">
+                                    <i class="fas fa-user-graduate"></i>Alumnos
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API_UBAM.Models;
 
-public class Usuario_Rol
+public class UsuarioRol
 {
     [Key, Column(Order = 0)] public Guid Id_Usuario { get; set; }
 

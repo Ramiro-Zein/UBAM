@@ -3,16 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API_UBAM.DatabaseContext;
 
-public class UbamDbContext : DbContext
+public class UbamDbContext(DbContextOptions<UbamDbContext> options) : DbContext(options)
 {
-    public UbamDbContext(DbContextOptions<UbamDbContext> options) : base(options)
-    {
-    }
-
     public DbSet<Persona> Personas { get; set; }
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Rol> Roles { get; set; }
-    public DbSet<Usuario_Rol> Usuario_Roles { get; set; }
+    public DbSet<UsuarioRol> UsuarioRoles { get; set; }
     public DbSet<Alumno> Alumnos { get; set; }
     public DbSet<Docente> Docentes { get; set; }
     public DbSet<Carrera> Carreras { get; set; }
@@ -20,7 +16,7 @@ public class UbamDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Clave Usuario_Rol
-        modelBuilder.Entity<Usuario_Rol>()
+        modelBuilder.Entity<UsuarioRol>()
             .HasKey(ur => new { ur.Id_Usuario, ur.Id_Rol });
 
         // Relación uno a uno entre Usuario y Persona
@@ -42,12 +38,12 @@ public class UbamDbContext : DbContext
             .HasForeignKey<Docente>(d => d.Id_Persona);
 
         // Relación muchos a muchos entre Usuario y Rol
-        modelBuilder.Entity<Usuario_Rol>()
+        modelBuilder.Entity<UsuarioRol>()
             .HasOne(ur => ur.Usuario)
             .WithMany(u => u.Usuario_Roles)
             .HasForeignKey(ur => ur.Id_Usuario);
 
-        modelBuilder.Entity<Usuario_Rol>()
+        modelBuilder.Entity<UsuarioRol>()
             .HasOne(ur => ur.Rol)
             .WithMany(r => r.Usuario_Roles)
             .HasForeignKey(ur => ur.Id_Rol);
@@ -138,17 +134,17 @@ public class UbamDbContext : DbContext
             new Rol
             {
                 Id_Rol = rolAdminId,
-                Nombre_Rol = Rol.NombreRol.Administrador
+                Nombre_Rol = "Administrador"
             },
             new Rol
             {
                 Id_Rol = rolDocenteId,
-                Nombre_Rol = Rol.NombreRol.Docente
+                Nombre_Rol = "Docente"
             },
             new Rol
             {
                 Id_Rol = rolAlumnoId,
-                Nombre_Rol = Rol.NombreRol.Alumno
+                Nombre_Rol = "Alumno"
             }
         );
 
@@ -185,18 +181,18 @@ public class UbamDbContext : DbContext
         );
 
         // 4. Usuario_Rol
-        modelBuilder.Entity<Usuario_Rol>().HasData(
-            new Usuario_Rol
+        modelBuilder.Entity<UsuarioRol>().HasData(
+            new UsuarioRol
             {
                 Id_Usuario = usuario1Id,
                 Id_Rol = rolAdminId
             },
-            new Usuario_Rol
+            new UsuarioRol
             {
                 Id_Usuario = usuario2Id,
                 Id_Rol = rolDocenteId
             },
-            new Usuario_Rol
+            new UsuarioRol
             {
                 Id_Usuario = usuario3Id,
                 Id_Rol = rolAdminId

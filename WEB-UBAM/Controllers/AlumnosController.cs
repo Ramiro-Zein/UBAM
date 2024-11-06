@@ -4,7 +4,7 @@ using WEB_UBAM.Services;
 
 namespace WEB_UBAM.Controllers;
 
-[Authorize]
+[Authorize(Roles = "Docente, Administrador")]
 public class AlumnosController(AlumnosService alumnosService) : Controller
 {
     public async Task<IActionResult> Index()

@@ -10,5 +10,5 @@ public interface IUsuario
     Usuario.Estatus Estatus_Usuario { get; set; }
     Guid Id_Persona { get; set; }
     Persona Persona { get; set; }
-    ICollection<Usuario_Rol> Usuario_Roles { get; set; }
+    ICollection<UsuarioRol> Usuario_Roles { get; set; }
 }

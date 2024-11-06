@@ -2,7 +2,7 @@
 
 namespace API_UBAM.Interfaces;
 
-public interface IUsuario_Rol
+public interface IUsuarioRol
 {
     Guid Id_Usuario { get; set; }
     Guid Id_Rol { get; set; }

@@ -17,7 +17,7 @@ public class Usuario
     public Persona Persona { get; set; }
 
     // Relación muchos a muchos con Rol
-    public ICollection<Usuario_Rol> Usuario_Roles { get; set; }
+    public ICollection<UsuarioRol> Usuario_Roles { get; set; }
 
     public enum Estatus
     {
