@@ -10,12 +10,5 @@ public class PersonaDto
     public DateOnly FechaNacimientoPersonaDto { get; set; }
     public string SexoPersonaDto { get; set; }
     public string CurpPersonaDto { get; set; }
-    public RolesDto Roles { get; set; } 
+    public List<string> Roles { get; set; } = new List<string>();
 }
-
-public class RolesDto
-{
-    [JsonPropertyName("$values")]
-    public List<string> Values { get; set; } = new List<string>();
-}
-

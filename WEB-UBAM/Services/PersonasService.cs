@@ -9,8 +9,8 @@ public class PersonasService(HttpClient httpClient)
     {
         try
         {
-            var response  = await httpClient.GetFromJsonAsync<ApiResponse<PersonaDto>>("Personas");
-            return response?.Values ?? new List<PersonaDto>();
+            var response  = await httpClient.GetFromJsonAsync<List<PersonaDto>>("Personas");
+            return response ?? new List<PersonaDto>();
         }
         catch (Exception ex)
         {

@@ -8,8 +8,8 @@ public class AlumnosService(HttpClient httpClient)
     {
         try
         {
-            var response = await httpClient.GetFromJsonAsync<ApiResponse<Alumno>>("Alumnos");
-            return response?.Values ?? new List<Alumno>();
+            var response = await httpClient.GetFromJsonAsync<List<Alumno>>("Alumnos");
+            return response ?? new List<Alumno>();
         }
         catch (Exception ex)
         {

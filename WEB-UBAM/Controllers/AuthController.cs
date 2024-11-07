@@ -34,9 +34,9 @@ public class AuthController(AuthService authService) : Controller
                     new Claim(ClaimTypes.Name, authResponse.Nombre_Completo)
                 };
 
-                if (authResponse.Roles?.Values != null && authResponse.Roles.Values.Any())
+                if (authResponse.Roles.Any())
                 {
-                    foreach (var rol in authResponse.Roles.Values)
+                    foreach (var rol in authResponse.Roles)
                     {
                         claims.Add(new Claim(ClaimTypes.Role, rol));
                     }
