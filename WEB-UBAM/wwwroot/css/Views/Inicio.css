@@ -10,8 +10,11 @@
 
 .welcome-section h1 {
     font-size: 2.5rem;
-    margin-bottom: 10px;
     animation: fadeInDown 1s ease-out;
+}
+
+.welcome-section span {
+    font-size: 1.4rem;
 }
 
 .welcome-section p {
@@ -45,6 +48,8 @@
     background-color: #ff4b5c;
     transform: scale(1.05);
 }
+
+
 
 @media (max-width: 768px) {
     .welcome-section {

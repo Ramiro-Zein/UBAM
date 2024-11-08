@@ -1,0 +1,42 @@
+﻿.container-ghost {
+    margin-top: 5rem;
+    text-align: center;
+}
+
+@keyframes ghostFloat {
+    0% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(20px, 20px);
+    }
+    50% {
+        transform: translate(0, 40px);
+    }
+    75% {
+        transform: translate(-20px, 20px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+.container-ghost .ghost {
+    width: 130px;
+    height: auto;
+    animation: ghostFloat 9s ease-in-out infinite;
+}
+
+.container-ghost .shadow {
+    animation: shrink 3s ease-out infinite;
+    transform-origin: center center;
+}
+
+@keyframes shrink {
+    0%, 100% {
+        transform: scaleX(1);
+    }
+    50% {
+        transform: scaleX(0.6);
+    }
+}
